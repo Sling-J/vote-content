@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <video autoplay muted loop id="myVideo">
+      <source src="../../../pictures/background-video/backgrountVideo.mp4" type="video/mp4">
+   </video>
+ 
+   <div class="content">
+      <div class="wrapper">
+         <div class="vote-title">
+            <h1>Vote content</h1>
+         </div>
+         {% if count_votes >= votes_list %}
+            <h2 class="goodbye">Thank you for voting</h2>
+         {% else %}
+            <form method="POST" enctype="multipart/form-data">
+               <div class="wrap-box">
+                  {% for person1,person2 in zipped_list %}
+                     <div class="wrap">
+                        <div class="person-item">
+                           <label class="checkbox-btn">
+                              <p class="person-name">{{ person1.login }}</p>
+                              <div class="img-box">
+                                 {% if person1.img %}
+                                    <img class="person-img" src="{{ person1.img.url }}">
+                                 {% else %}
+                                    <img class="person-img" src="/pictures/default.jpg">
+                                 {% endif %}
+                              </div>
+                              <input class="checkbox" type="checkbox" name="person1[]" value="{{ person1.id }}">
+                              <div class="overlay">
+                                 <p>Проголосовать</p>
+                              </div>
+                           </label>
+                        </div>
+                        <div class="person-item">
+                           <label class="checkbox-btn">
+                              <p class="person-name">{{ person2.login }}</p>
+                              <div class="img-box">
+                                 {% if person2.img %}
+                                    <img class="person-img" src="{{ person2.img.url }}">
+                                 {% else %}
+                                    <img class="person-img" src="/pictures/default.jpg">
+                                 {% endif %}
+                              </div>
+                              <input class="checkbox" type="checkbox" name="person2[]" value="{{ person2.id }}">
+                              <div class="overlay">
+                                 <p>Проголосовать</p>
+                              </div>
+                           </label>
+                        </div>
+                     </div>
+                  {% endfor %}
+                  <div class="submit-form">
+                     <button type="submit">Отправить голоса</button>
+                  </div>
+                  {% csrf_token %}
+               </div>
+            </form>
+         {% endif %}
+         <div class="vote-footer">
+            <p>Join for us on <a href="#">instagram - @lonelypip</a></p>
+         </div>
+      </div>
+   </div>
+{% endblock %}
