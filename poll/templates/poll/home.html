@@ -1,50 +1,61 @@
 {% extends 'base.html' %}
 
+{% block title %}Vote - Semey Chickens{% endblock %}
+
 {% block content %}
-   <video autoplay muted loop id="myVideo">
-      <source src="../../../pictures/background-video/backgrountVideo.mp4" type="video/mp4">
-   </video>
- 
    <div class="content">
       <div class="wrapper">
-         <div class="vote-title">
-            <h1>Vote content</h1>
-         </div>
-         {% if count_votes >= votes_list %}
+         {% if count_votes >= half_list %}
             <h2 class="goodbye">Thank you for voting</h2>
          {% else %}
-            <form method="POST" enctype="multipart/form-data">
-               <div class="wrap-box">
+            <form class="form-person" method="POST" enctype="multipart/form-data">
+               <div class="person-list-box">
+                  
+                  {% if messages %}                     
+                     {% for mess in messages %}
+                        <div />
+                        <p class="error-message">
+                           <a href="{% url 'home_url' %}">{{ mess }}</a>
+                        </p>
+                     {% endfor %}
+                  {% endif %}
+
                   {% for person1,person2 in zipped_list %}
-                     <div class="wrap">
-                        <div class="person-item">
-                           <label class="checkbox-btn">
-                              <p class="person-name">{{ person1.login }}</p>
-                              <div class="img-box">
+                     <div class="person-list__container">
+                        <div class="person-list__item">
+                           <label class="person-list__item__label">
+                              <p class="person-list__item__name">
+                                 {{ person1.login }} <br>
+                                 Голосов: {{ person1.vote_score }}
+                              </p>
+                              <div class="person-list__item__ava__box">
                                  {% if person1.img %}
-                                    <img class="person-img" src="{{ person1.img.url }}">
+                                    <img class="person-list__item__ava" src="{{ person1.img.url }}">
                                  {% else %}
-                                    <img class="person-img" src="/pictures/default.jpg">
+                                    <img class="person-list__item__ava" src="/pictures/default.jpg">
                                  {% endif %}
                               </div>
-                              <input class="checkbox" type="checkbox" name="person1[]" value="{{ person1.id }}">
-                              <div class="overlay">
+                              <input class="person-is-voted" type="checkbox" name="person[]" value="{{ person1.id }}">
+                              <div class="person-list__overlay">
                                  <p>Проголосовать</p>
                               </div>
                            </label>
                         </div>
-                        <div class="person-item">
-                           <label class="checkbox-btn">
-                              <p class="person-name">{{ person2.login }}</p>
-                              <div class="img-box">
+                        <div class="person-list__item">
+                           <label class="person-list__item__label">
+                              <p class="person-list__item__name">
+                                 {{ person2.login }} <br>
+                                 Голосов: {{ person2.vote_score }}
+                              </p>
+                              <div class="person-list__item__ava__box">
                                  {% if person2.img %}
-                                    <img class="person-img" src="{{ person2.img.url }}">
+                                    <img class="person-list__item__ava" src="{{ person2.img.url }}">
                                  {% else %}
-                                    <img class="person-img" src="/pictures/default.jpg">
+                                    <img class="person-list__item__ava" src="/pictures/default.jpg">
                                  {% endif %}
                               </div>
-                              <input class="checkbox" type="checkbox" name="person2[]" value="{{ person2.id }}">
-                              <div class="overlay">
+                              <input class="person-is-voted" type="checkbox" name="person[]" value="{{ person2.id }}">
+                              <div class="person-list__overlay">
                                  <p>Проголосовать</p>
                               </div>
                            </label>
@@ -58,9 +69,6 @@
                </div>
             </form>
          {% endif %}
-         <div class="vote-footer">
-            <p>Join for us on <a href="#">instagram - @lonelypip</a></p>
-         </div>
       </div>
    </div>
 {% endblock %}

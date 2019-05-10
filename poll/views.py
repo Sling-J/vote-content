@@ -1,9 +1,8 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Human
-from .forms import HumanForm
 from django.views.generic import View 
 import re
+from django.contrib import messages
 
 def get_client_ip(request):
    """get the client ip from the request
@@ -29,51 +28,45 @@ def get_client_ip(request):
 
 
 class Poll(View):
+   test_ip = 360
+   people = Human.objects.all()
+   half_list = len(people)/2
+
    def get(self, request):
-      people = Human.objects.all()
-      votes_list = len(people)/2
-      group_a = people[::2]
-      group_b = people[1::2]
-      zipped_list = zip(group_a,group_b)
-
+      zipped_list = zip(self.people[::2], self.people[1::2])
       user_ip = re.sub('[,:.]','',get_client_ip(request))
-      print()
+      person = Human.objects.get(id=28)
+      count_votes = len(person.votes.all(user_ip))
       print(user_ip)
-      print()
-      print()
-   
-
-      ara = Human.objects.get(id=16)
-      wmara = ara.votes.all(454)
-
-      count_votes = len(wmara)
-
-      print(count_votes)
-      print(ara.votes.all(454))
-      print()
-      print(votes_list)
-
-
-
-
-      #rr = Human.objects.get(id=8)
-      #print(rr.votes.exists(50))
       return render(request, 'poll/home.html', context={
          'zipped_list':zipped_list,
          'count_votes':count_votes,
-         'votes_list':votes_list,
+         'half_list':self.half_list,
       })
    
    def post(self, request):
-      check_values1 = request.POST.getlist('person1[]')
-      check_values2 = request.POST.getlist('person2[]')
-      obwi = check_values1 + check_values2
+      check_values = request.POST.getlist('person[]')
       user_ip = re.sub('[.]','',get_client_ip(request))
-      print(obwi)
       try:
-         for kek in obwi:
-            qwerty = Human.objects.get(id=int(kek))
-            qwerty.votes.up(454)
-         return redirect('home_url')
+         if len(check_values) == self.half_list:
+            for kek in check_values:
+               qwerty = Human.objects.get(id=int(kek))
+               qwerty.votes.up(user_ip)
+            return redirect('home_url')
+         else:
+            messages.success(request, f'Вы проголосовали неверное количество раз. Перезагрузите страницу')
+            return redirect('home_url')
       except:
          return redirect('home_url')
+
+def leaderboard(request):
+   people = Human.objects.all()
+   number_1 = Human.objects.filter().order_by('-vote_score')[0]
+   number_2 = Human.objects.filter().order_by('-vote_score')[1]
+   number_3 = Human.objects.filter().order_by('-vote_score')[2]
+   return render(request, 'poll/leaderboard.html', context={
+      'number_1':number_1,
+      'number_2':number_2,
+      'number_3':number_3
+   })
+

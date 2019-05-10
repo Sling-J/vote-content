@@ -1,8 +1,10 @@
-const changePersonBtn = document.querySelectorAll('.checkbox');
-const wrapBox = document.querySelector('.wrap-box');
+// Slider Effect
 
-if (wrapBox) { 
-   var currentWrap = wrapBox.firstElementChild
+const changePersonBtn = document.querySelectorAll('.person-is-voted');
+const personListBox = document.querySelector('.person-list-box');
+
+if (personListBox) { 
+   var currentWrap = personListBox.firstElementChild
    currentWrap.classList.add('active');
 };
 

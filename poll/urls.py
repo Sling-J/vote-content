@@ -4,5 +4,6 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', views.Poll.as_view(), name='home_url')
+    path('', views.Poll.as_view(), name='home_url'),
+    path('leaderboard/', views.leaderboard, name='leaderboard_url')
 ]

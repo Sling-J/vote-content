@@ -5,15 +5,22 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet">
    <link rel="stylesheet" href="{% static 'poll/style.css' %}">
    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+   <nav class="vote-header">
+      <div class="wrapper j-flex">
+         <h1 class="vote-title"><span>Vote</span> content</h1>
+         <p class="vote-footer-text">Join for us on <a href="https://www.instagram.com/lonelypip/" target="_blank">instagram - @lonelypip</a></p>
+      </div>
+   </nav>
    {% block content %}
    {% endblock %}
    
    
+   <script src="../static/js/jquery-3.3.1.min.js"></script>
    <script src="../static/js/custom.js"></script>
 </body>
 </html>

@@ -20,62 +20,93 @@ p {
    padding: 0 25px;
 }
 
+.j-flex {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
 /* Styles */
 
-#myVideo {
-   position: fixed;
-   left: 0px;
+.error-message {
+   background: tomato;
+   padding: 10px 20px;
+   display: inline-block !important;
+   margin: 150px 0 223px;
+   font-size: 1.2em;
+}
+
+.error-message a {
+   color: inherit;
+}
+
+.vote-header {
+   padding: 15px 0;
+   position: absolute;
+   background: #fff;
    top: 0;
+   left: 0;
    right: 0;
-   bottom: 0;
-   width: 100%;
-   min-height: 100%;
+}
+
+.vote-title {
+   font-weight: 300;
+}
+
+.vote-title span {
+   color: rgba(44,166,170,1);
+}
+
+.vote-footer-text a {
+   color: rgba(44,166,170,1);
 }
 
 .content {
    color: #fff;
-   position: absolute;
    text-align: center;
-   top: 0;
-   left: 0;
-   right: 0;
-   bottom: 0;
-   background-color: rgba(0, 0, 0, 0.7);
+   transition: all 1s;
+   background: url('/pictures/bg2.jpg');
+   background-size: cover;
+   height: 100vh;
 }
 
-.vote-title {
-   text-align: left;
-   padding: 20px;  
+.goodbye {
+   font-size: 3em;
+   text-transform: uppercase;
+   padding-top: 25%;
 }
 
-.vote-footer {
-   margin-top: 7%;
-}
-
-.vote-footer p a {
-   color: #FED428;
-}
-
-.img-box {
-   font-size: 0;
-}
-
-.person-img {
-   width: 100%;
+.form-person {
+   padding-top: 15%;
 }
 
 .active {
    display: flex !important;
    justify-content: space-around;
-   margin-top: 10%;
-   margin-bottom: 20px;
 }
 
-.person-item {
+.person-list__item {
+   padding: 7px;
    width: 22%;
+   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+   border: 1px solid #aaa;
 }
 
-.person-name {
+.person-list__item:first-child {
+   background: linear-gradient(to right, rgba(234,220,193, 1) 0%,rgba(254,245,216,1) 54%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.person-list__item:last-child {
+   background: linear-gradient(to left, rgba(234,220,193, 1) 0%,rgba(254,245,216,1) 54%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.person-list__item__label {
+   position: relative;
+   display: block;
+   cursor: pointer;
+}
+
+.person-list__item__name {
    position: absolute;
    width: 100%;
    padding: 9px;
@@ -85,13 +116,15 @@ p {
    font-size: 17px;
 }
 
-.checkbox-btn {
-   position: relative;
-   display: block;
-   cursor: pointer;
+.person-list__item__ava__box {
+   font-size: 0;
 }
 
-.overlay {
+.person-list__item__ava {
+   width: 100%;
+}
+
+.person-list__overlay {
    background: rgba(0, 0, 0, 0.4);
    opacity: 0;
    position: absolute;
@@ -102,23 +135,15 @@ p {
    bottom: 0;
 }
 
-.overlay p {
+.person-list__overlay p {
    margin-top: 67%;
    color: #fff;
    font-size: 22px;
 }
 
-.goodbye {
-   font-size: 3em;
-   text-transform: uppercase;
-   margin-top: 18%;
-   margin-bottom: 23%;
-}
-
 .submit-form button {
    font-size: 16px;
-   margin-top: 10%;
-   margin-bottom: 14.5%;
+   margin: 135px auto 0;
    display: inline-block;
    background: #FED428;
    color: #2B3956;
@@ -136,17 +161,135 @@ p {
    background: #ffe477;
 }
 
-.checkbox-btn:hover .overlay {
+.person-list__item__label:hover .person-list__overlay {
    opacity: 1;
 }
 
-.wrap,
 .submit-form,
-.checkbox-btn input[type="checkbox"] {
+.person-is-voted,
+.person-list__container {
    display: none;
 }
 
-.checkbox-btn input[type="checkbox"]:checked + .overlay {
+.person-is-voted:checked + .person-list__overlay {
    opacity: 1;
    background: rgba(0, 0, 0, 0.6);
+}
+
+/* Adaptive */
+
+@media (max-width: 1036px) {
+   .form-person {
+      padding-top: 22%;
+   }
+
+   .goodbye {
+      padding-top: 34%;
+   }
+}
+
+@media (max-width: 900px) {
+   .form-person {
+      padding-top: 25%;
+   }
+
+   .person-list__item {
+      width: 27%;
+   }
+}
+
+@media (max-width: 730px) {
+   .form-person {
+      padding-top: 35%;
+   }
+
+   .goodbye {
+      padding-top: 50%;
+   }
+}
+
+@media (max-width: 680px) {
+   .active {
+      justify-content: space-between;
+   }
+
+   .person-list__item {
+      width: 35%;
+   }
+}
+
+@media (max-width: 555px) {
+   .person-list__overlay p {
+      font-size: 16px;
+   }
+}
+
+@media (max-width: 536px) {
+   .form-person {
+      padding-top: 50%;
+   }
+
+   .vote-header .j-flex {
+      display: block;
+   }
+
+   .vote-footer-text {
+      margin-top: 10px;
+   }
+
+   .goodbye {
+      padding-top: 65%;
+      font-size: 2.5em;
+   }
+}
+
+@media (max-width: 440px) {
+   .form-person {
+      padding-top: 37%;
+   }
+
+   .active {
+      display: block !important;
+   }
+
+   .person-list__item {
+      margin: 0 auto 50px;
+      width: 45%;
+   }
+}
+
+@media (max-width: 400px) {
+   .form-person {
+      padding-top: 35%;
+   }
+
+   .person-list__item {
+      width: 53%;
+   }
+
+   .goodbye {
+      padding-top: 80%;
+   }
+}
+
+@media (max-width: 375px) {
+   .form-person {
+      padding-top: 42%;
+   }
+}
+
+@media (max-width: 360px) {
+   .vote-header {
+      font-size: 13px;
+   }
+
+   .form-person {
+      padding-top: 38%;
+   }
+}
+
+@media (max-width: 290px) {
+   .form-person {
+      padding-top: 50%;
+   }
 }
