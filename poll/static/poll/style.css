@@ -176,6 +176,38 @@ p {
    background: rgba(0, 0, 0, 0.6);
 }
 
+/* Leaderboard */
+
+.leaderboard {
+   background: url('/pictures/bg4.jpg');
+   color: #fff;
+   height: 100vh;
+}
+
+.leaderboard h1 {
+   padding-top: 80px;
+}
+
+.leaderboard-box__item {
+   width: 32%;
+}
+
+.leaderboard-box__item:nth-child(2) {
+   width: 39%;
+}
+
+.leaderboard-box__item:first-child {
+   width: 34%;
+}
+
+.leaderboard-box__item:last-child {
+   width: 24%;
+}
+
+.leaderboard-box__item img {
+   width: 100%;
+}
+
 /* Adaptive */
 
 @media (max-width: 1036px) {

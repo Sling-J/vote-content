@@ -1,32 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-   <h1>TOP 3</h1>
-   <p>
-      Первое место: {{ number_1.login }}
-      <img src="{{ number_1.img.url }}">
-   </p>
-   <p>
-      Голосов: {{ number_1.vote_score }}
-   </p>
-   <br/>
-   <br/>
-   <br/>
-   <p>
-      Второе место: {{ number_2.login }}
-      <img src="{{ number_2.img.url }}">
-   </p>
-   <p>
-      Голосов: {{ number_2.vote_score }}
-   </p>
-   <br/>
-   <br/>
-   <br/>
-   <p>
-      Третье место: {{ number_3.login }}
-      <img src="{{ number_3.img.url }}">
-   </p>
-   <p>
-      Голосов: {{ number_3.vote_score }}
-   </p>
+   <section class="leaderboard">
+      <div class="wrapper">
+         <h1>TOP 3</h1>
+
+         <div class="leaderboard-box j-flex">
+            <div class="leaderboard-box__item">
+               <p>Первое место: {{ number_1.login }}</p>
+               <img src="{{ number_1.img.url }}">
+               <p>Голосов: {{ number_1.vote_score }}</p>
+            </div>
+            
+            <div class="leaderboard-box__item">
+               <p>Второе место: {{ number_2.login }}</p>
+               <img src="{{ number_2.img.url }}">
+               <p>Голосов: {{ number_2.vote_score }}</p>
+            </div>
+
+            <div class="leaderboard-box__item">
+               <p>Третье место: {{ number_3.login }}</p>
+               <img src="{{ number_3.img.url }}">
+               <p>Голосов: {{ number_3.vote_score }}</p>
+            </div>
+         </div>
+      </div>
+   </section>
 {% endblock %}
